@@ -1,0 +1,13 @@
+from googletrans import Translator
+
+def translate_sentence(sentence, target_language='en'):
+    translator = Translator()
+    translation = translator.translate(sentence, dest=target_language)
+    return translation.text
+
+if __name__ == "__main__":
+    sentence = "Hola, ¿cómo estás?"
+    target_language = 'en'
+    translated_sentence = translate_sentence(sentence, target_language)
+    print(f"Original Sentence: {sentence}")
+    print(f"Translated Sentence: {translated_sentence}")
