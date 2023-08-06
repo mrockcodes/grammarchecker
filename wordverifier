@@ -4,7 +4,7 @@ def grammar_correction(text):
     base_url = "https://languagetool.org/api/v2/check"
     params = {
         "text": text,
-        "language": "en-US",  # You can change the language code as needed
+        "language": "en-US",
     }
 
     response = requests.post(base_url, data=params)
