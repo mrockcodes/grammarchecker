@@ -1,0 +1,32 @@
+import requests
+
+def grammar_correction(text):
+    base_url = "https://languagetool.org/api/v2/check"
+    params = {
+        "text": text,
+        "language": "en-US",  # You can change the language code as needed
+    }
+
+    response = requests.post(base_url, data=params)
+
+    if response.ok:
+        data = response.json()
+        corrections = []
+        for mistake in data['matches']:
+            correction = mistake['replacements'][0]['value']
+            incorrect = mistake['context']['text']
+            corrections.append((incorrect, correction))
+        return corrections
+    else:
+        response.raise_for_status()
+        return None
+
+if __name__ == "__main__":
+    sentence = "He don't want no trouble."
+    corrections = grammar_correction(sentence)
+    if corrections:
+        for incorrect, correction in corrections:
+            print(f"Incorrect: {incorrect}")
+            print(f"Correction: {correction}")
+    else:
+        print("Grammar check failed.")
